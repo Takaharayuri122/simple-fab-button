@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple fab button</title>
+</head>
+
+<body>
+  <style>
+    .fab {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+    }
+
+    .fab button {
+      cursor: pointer;
+      width: 150px;
+      height: 48px;
+      border-radius: 30px;
+      background-color: #559411;
+      border: none;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, .4);
+      font-size: 16px;
+      color: white;
+
+      -webkit-transition: .2s ease-out;
+      -moz-transition: .2s ease-out;
+      transition: .2s ease-out;
+    }
+
+    .fab button:focus {
+      outline: none;
+    }
+
+    .fab button.fab-main {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 30px;
+      background-color: #80bb40;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+    }
+
+    .fab button.fab-main:before {
+      content: '+';
+    }
+
+    .fab ul {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0;
+      padding-right: 5px;
+      margin: 0;
+      list-style: none;
+      z-index: 10;
+
+      -webkit-transition: .2s ease-out;
+      -moz-transition: .2s ease-out;
+      transition: .2s ease-out;
+    }
+
+    .fab ul li {
+      display: flex;
+      justify-content: flex-start;
+      position: relative;
+      margin-bottom: -10%;
+      opacity: 0;
+
+      -webkit-transition: .3s ease-out;
+      -moz-transition: .3s ease-out;
+      transition: .3s ease-out;
+    }
+
+
+
+    .fab.show button.fab-main,
+    .fab.show button.fab-main {
+      outline: none;
+      background-color: #80bb40;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .5);
+    }
+
+    .fab.show button.fab-main:before,
+    .fab.show button.fab-main:before {
+      content: '↑';
+    }
+
+    .fab.show button.fab-main+ul,
+    .fab.show button.fab-main+ul {
+      bottom: 70px;
+    }
+
+    .fab.show button.fab-main+ul li,
+    .fab.show button.fab-main+ul li {
+      margin-bottom: 10px;
+      opacity: 1;
+    }
+  </style>
+
+  <div class="fab">
+    <button class="fab-main">
+    </button>
+    <ul>
+      <li>
+        <button id="opcao1">
+          Agendamentos
+        </button>
+      </li>
+      <li>
+        <button id="opcao2">
+          Pagamentos
+        </button>
+      </li>
+      <li>
+        <button id="opcao3">
+          Resultados
+        </button>
+      </li>
+    </ul>
+  </div>
+</body>
+
+<script>
+  function toggleFab(fab) {
+    if (document.querySelector(fab).classList.contains('show')) {
+      document.querySelector(fab).classList.remove('show');
+    } else {
+      document.querySelector(fab).classList.add('show');
+    }
+  }
+
+  document.querySelector('.fab .fab-main').addEventListener('click', function () {
+    toggleFab('.fab');
+  });
+
+  document.querySelectorAll('.fab ul li button').forEach((item) => {
+    item.addEventListener('click', function () {
+      toggleFab('.fab');
+    });
+  });
+</script>
+
+</html>
